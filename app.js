@@ -5,6 +5,7 @@ angular.module("backCastingApp",[])
 		$scope.stakeHolders = stakeHolders;
 		$scope.factors = factors;
 
+		$scope.compromiseFactors = [];
 		$scope.sortedFactors = {
 			social: [],
 			economic: [],
@@ -118,12 +119,23 @@ angular.module("backCastingApp",[])
 			curr
 			while(factorsCount) {
 				while(prevRand.indexOf(curr) != -1) {
-					curr = Math.floor(Math.random() * ($scope.factors.length-1 - 1)) + 1;	
+					curr = Math.floor(Math.random() * ($scope.factors.length-2 - 1)) + 1;	
 				}
-				stake.factors.push($scope.factors[curr]);
+
+				function fact(obj) {
+					if (obj){
+						this.descr = obj.descr;
+					}
+				}
+
+				stake.factors.push(new fact($scope.factors[curr]));
+
 				if (stake.factors.length > 1){
-				stake.factors[stake.factors.length-1].impact = Math.floor(Math.random() * (5 - 1)) + 1;
-				stake.factors[stake.factors.length-1].interest = Math.floor(Math.random() * (5 - 1)) + 1;
+
+
+
+				stake.factors[stake.factors.length-1].impact = Math.floor(Math.random() * (10 - 1)) + 1;
+				stake.factors[stake.factors.length-1].interest = Math.floor(Math.random() * (10 - 1)) + 1;
 				}
 				prevRand.push(curr);
 				factorsCount--;
@@ -188,9 +200,8 @@ angular.module("backCastingApp",[])
 				}
 			}
 			console.log("================");
-			for(var i = 0; i < compromiseFactors.length; i++) {
-				console.log(compromiseFactors[i]);	
-			}
+			console.log(compromiseFactors);
+			$scope.compromiseFactors = compromiseFactors;
 			
 		}
 
