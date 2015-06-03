@@ -262,6 +262,20 @@ angular.module("backCastingApp",[])
 		/*draw circles*/
 
 
+		$scope.compromiseFactors.forEach( function (n) {
+			s.circle(n.avInterest*100,n.avImpact*100,50).attr({
+				fill: "#404040" 
+			});
+			s.text(n.avInterest*100,n.avImpact*100,n.descr).attr({
+				fill: "#200000",
+				font: "20px Arial" 
+			});
+		});
+
+
+
+
+
 		}
 
 
