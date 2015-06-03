@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="backCastingApp" >
+<head>
+	<meta charset="UTF-8">
+	<title>
+
+	</title>
+
+<script src="bower_components/angular/angular.js" ></script>
+<script src="bower_components/jquery/dist/jquery.min.js" ></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js" ></script>
+
+<script src="app.js" ></script>
+<script src="sourses/stakeHolders.js"></script>
+<script src="sourses/factors.js"></script>
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+
+
+<style>
+	.stakeList{
+		cursor: pointer;
+		display: block;
+
+	}
+	.stakeList li {
+		display: block;
+		
+		
+	}
+
+	.stakeList li:hover{
+		background-color: #4E4C4C;
+		color:white;
+		transition: 0.4s;
+	}
+
+	.table tr{
+		background-color: rgb(78,76,76);
+		color: white;
+
+	}
+	.table tr td:first-child:hover {
+		cursor: pointer;
+	}
+	.section2{
+		clear: both;
+	}
+	.op{
+		border-radius: 10px;
+	}
+
+	.factors ul {
+		padding: 0px;
+	}
+
+	.factors > li{
+		float: left;
+		margin-left: 10px;
+		margin-right: 10px;
+		padding: 0px;
+	}
+
+	.factorsPanel{
+		clear:both;
+	}
+	.factorsPanel ul > li > ul li:hover {
+		cursor: pointer;
+		background-color: rgb(78,76,76);
+		color: white;
+
+	}
+
+
+
+</style>
+
+
+
+</head>
+<body ng-controller="backController" >
+	
+	<div class="section1">
+		
+		<!--potential stakeholders
+		-->
+		<div class="col-md-2" ng-hide="stage1Finished"  >
+			<legend> Оберіть зацікавлені сторони для участі у проекті </legend>	
+			<ul class="list-group stakeList ">
+			<li class="list-group-item " ng-repeat="stake in stakeHolders" ng-click="addStakeHolder(stake)" >{{stake.name}}</li>
+			</ul>
+
+		<button ng-click="endStage1()" class="btn btn-primary" >Далі</button>
+		</div>
+		
+		
+
+		<div class="col-md-4" >
+			<legend> Зацікавлені сторони проекту: </legend>
+			<table class="table">
+				<tr class="" ng-repeat="stake in projectStakeHolders"> 
+					<td ng-click="setCurrentStakeHolder(stake)">{{stake.name}}</td>
+					<td><button class="btn btn-success" >Заповнити</button></td>
+					<td><button class="btn btn-primary" >Автоматично заповнити</button></td>
+					<td><button class="btn btn-danger op" ng-click="deleteStakeHolder(stake)" >
+						<span class="glyphicon glyphicon-remove" ></span>
+					</button></td>				
+				</tr>
+				
+			</table>
+
+		</div>
+
+		<div class="col-md-4">
+			<legend>Фактори зацікавленої сторони <b>{{currentStakeHolder.name}}<b></legend>
+		
+			<table class="table">
+				<tr>
+					<td>Опис</td>
+					<td>Інтерес</td>
+					<td>Вплив</td>
+					<td>Категорія</td>
+
+				</tr>
+				<tr class="" ng-repeat="f in currentStakeHolder.factors"> 
+					<td>{{f.descr}}</td>
+					<td>{{f.interest}}</td>
+					<td>{{impact}}</td>
+					<td>{{category}}</td>				
+				</tr>
+				
+			</table>
+
+
+
+		</div>
+
+	</div>
+
+
+
+<div class="factorsPanel">
+<legend>Оберіть фактори для обраної сторони </legend>
+<div >
+		<ul class="factors list-group" >
+			<li>
+				<h3>eкoномічні</h3>
+				<ul>
+					<li class="list-group-item" ng-repeat="ec in sortedFactors.economic" ng-click="addFactorToStakeHolder(ec)">{{ec.descr}}</li>
+				</ul>
+			</li>
+			
+			<li>
+				<h3>coціальні</h3>
+				<ul>
+					<li class="list-group-item" ng-repeat="soc in sortedFactors.social" ng-click="addFactorToStakeHolder(soc)">{{soc.descr}}</li>
+				</ul>
+			</li>
+
+			<li>
+				<h3>організаційні</h3>
+				<ul>
+					<li class="list-group-item" ng-repeat="org in sortedFactors.organizational" ng-click="addFactorToStakeHolder(org)">{{org.descr}}</li>
+				</ul>
+			</li>
+
+			<li>
+				<h3>організаційні</h3>
+				<ul>
+					<li class="list-group-item" ng-repeat="tech in sortedFactors.technological" ng-click="addFactorToStakeHolder(tech)">{{tech.descr}}</li>
+				</ul>
+			</li>
+			
+
+
+		</ul>
+
+	</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="section2" ng-show="stage1Finished" >
+		<div class="col-md-6" >
+			<legend>Визначення вимог сторін</legend>
+
+	<form class="form-horizontal" style="width:500px">
+    
+    <div class="form-group">
+        <label for="inputPassword" class="control-label col-xs-2">Опис Вимоги</label>
+        <div class="col-xs-10">
+            <input type="text" class="form-control" id="inputPassword" placeholder="Password">
+        </div>
+    </div>
+
+
+	<div class="form-group">
+        <label for="inputPassword" class="control-label col-xs-2">Інтерес</label>
+        <div class="col-xs-10">
+            <input type="text" class="form-control" id="inputPassword" placeholder="Password">
+        </div>
+    </div>
+
+	<div class="form-group">
+        <label for="inputPassword" class="control-label col-xs-2">Рівень впливу</label>
+        <div class="col-xs-10">
+            <input type="text" class="form-control" id="inputPassword" placeholder="Password">
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-xs-offset-2 col-xs-10">
+            <button type="submit" class="btn btn-primary">Зберегти</button>
+        </div>
+    </div>
+</form>
+
+
+
+
+		</div>
+</div>
+
+</body>
+</html>
