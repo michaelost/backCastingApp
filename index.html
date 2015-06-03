@@ -100,7 +100,9 @@
 		font-size: 20px !important;
 	}
 
-
+	.compromiseTable {
+		width: 400px !important;
+	}
 	
 </style>
 
@@ -313,6 +315,17 @@
 		<pattern id="pattern" x="0" y="0" width="10" height="10" viewBox="0 0 10 10" ></pattern>
 
 	</svg>
+	<table class="table compromiseTable"  >
+		<tr>
+			<td>Фактор</td>
+			<td>Номер</td>
+		</tr>
+		<tr ng-repeat="comp in compromiseFactors" >
+			<td>{{comp.descr}}</td>
+			<td>{{comp.number}}</td>
+			
+		</tr>
+	</table>
 
 </div>
 

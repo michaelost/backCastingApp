@@ -232,8 +232,55 @@ angular.module("backCastingApp",[])
  			 strokeWidth: 5,
  			 strokeLinecap:"round"
 	    });
+	   /*interes coordinates*/
+	   s.line(1,30,900,30).attr({
+	   		stroke: "red",
+	   		strokeWidth: 15,
+ 			strokeLinecap:"round"
+	   });
+	   s.line(900,30,850,60).attr({
+	   		stroke: "red",
+	   		strokeWidth: 15,
+ 			strokeLinecap:"round"
+	   });
+	   s.line(900,30,850,10).attr({
+	   		stroke: "red",
+	   		strokeWidth: 15,
+ 			strokeLinecap:"round"
+	   });
+
+	   s.text(800,80,"interes").attr({
+				fill: "#200000",
+				fontSize: "40px" 
+			});
+
+	   /*impact coordinate line*/
+
+	   s.line(30,0,30,900).attr({
+	   		stroke: "red",
+	   		strokeWidth: 15,
+ 			strokeLinecap:"round"
+	   });
+	   s.line(30,900,60,850).attr({
+	   		stroke: "red",
+	   		strokeWidth: 15,
+ 			strokeLinecap:"round"
+	   });
+	   s.line(30,900,10,850).attr({
+	   		stroke: "red",
+	   		strokeWidth: 15,
+ 			strokeLinecap:"round"
+	   });
+
+	   s.text(50,900,"interes").attr({
+				fill: "#200000",
+				fontSize: "40px" 
+			});
+
+
 	   
-	    s.text(100,400,"wqe");
+
+	   
 
 
 	    for (var i = 0; i < $scope.compromiseFactors.length; i++) {
@@ -251,7 +298,7 @@ angular.module("backCastingApp",[])
 			});
 			$scope.compromiseFactors[i].avInterest = Math.floor(sum / count);
 			sum = 0; count = 0;
-
+			$scope.compromiseFactors[i].number = i;
 		}
 
 		console.log("========compromiseFactors====");
@@ -266,9 +313,9 @@ angular.module("backCastingApp",[])
 			s.circle(n.avInterest*100,n.avImpact*100,50).attr({
 				fill: "#404040" 
 			});
-			s.text(n.avInterest*100,n.avImpact*100,n.descr).attr({
+			s.text(n.avInterest*100,n.avImpact*100,n.number).attr({
 				fill: "#200000",
-				font: "20px Arial" 
+				fontSize: "40px" 
 			});
 		});
 
