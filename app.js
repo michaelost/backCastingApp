@@ -65,9 +65,49 @@ angular.module("backCastingApp",[])
 		}
 
 		$scope.addFactorToStakeHolder = function (factor) {
-			if($scope.currentStakeHolder.factors) {
-				$scope.currentStakeHolder.factors.push(factor);
+			var index = -1;
+			for(var i = 0; i < $scope.currentStakeHolder.factors.length; i++) {
+				if($scope.currentStakeHolder.factors[i].descr == factor.descr) {
+					index = i;
+				}
 			}
+
+			if($scope.currentStakeHolder.factors) {
+				if (index == -1)
+				$scope.currentStakeHolder.factors.push(factor);
+				index = -1;
+			}
+		}
+
+		$scope.removeFactor = function (item) {
+			var index = -1;
+			for(var i = 0; i < $scope.currentStakeHolder.factors.length; i++) {
+				if($scope.currentStakeHolder.factors[i].descr == item) {
+					index = i;
+				}
+				if(index != -1) {
+					$scope.currentStakeHolder.factors.splice(index,1);
+
+				}
+
+			}
+		}
+
+		$scope.ind = 0;
+
+		$scope.nextFactor = function () {
+			if($scope.ind == $scope.currentStakeHolder.factors.length - 1) {
+				$scope.ind = 0;
+			} else $scope.ind++;
+		}
+		$scope.prevFactor = function () {
+			if($scope.ind == 0) {
+				$scope.ind = $scope.currentStakeHolder.factors.length-1;
+			} else $scope.ind--;
+
+		}
+		$scope.saveFactorMeasures = function () {
+
 		}
 
 		$scope.currentStakeHolder = {};

@@ -70,7 +70,9 @@
 
 	}
 
-
+	.red {
+		color: red;
+	}
 
 </style>
 
@@ -99,6 +101,7 @@
 			<table class="table">
 				<tr class="" ng-repeat="stake in projectStakeHolders"> 
 					<td ng-click="setCurrentStakeHolder(stake)">{{stake.name}}</td>
+					<td ng-class="{'red' : stake.factors.length == 0}">факторів: {{stake.factors.length}}</td>
 					<td><button class="btn btn-success" >Заповнити</button></td>
 					<td><button class="btn btn-primary" >Автоматично заповнити</button></td>
 					<td><button class="btn btn-danger op" ng-click="deleteStakeHolder(stake)" >
@@ -107,6 +110,59 @@
 				</tr>
 				
 			</table>
+
+
+
+<!--========================================================== -->
+		
+<div class="section2" ng-show="stage1Finished" >
+		<div class="col-md-6" >
+			<legend>Визначення вимог сторін</legend>
+
+	<form class="form-horizontal" style="width:500px">
+    
+    <div class="form-group">
+        <label for="inputPassword" class="control-label col-xs-2">Опис Вимоги</label>
+        <div class="col-xs-10">
+            <input type="text" ng-model="currentStakeHolder.factors[ind].descr" class="form-control" id="inputPassword" placeholder="опис вимог">
+        </div>
+    </div>
+
+
+	<div class="form-group">
+        <label for="inputPassword" class="control-label col-xs-2">Інтерес</label>
+        <div class="col-xs-10">
+            <input type="text" class="form-control" ng-model="currentStakeHolder.factors[ind].interest" id="inputPassword" placeholder="інтерес">
+        </div>
+    </div>
+
+	<div class="form-group">
+        <label for="inputPassword" class="control-label col-xs-2">Рівень впливу</label>
+        <div class="col-xs-10">
+            <input type="text" ng-model="currentStakeHolder.factors[ind].impact" class="form-control" id="inputPassword" placeholder="Рівень впливу">
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-xs-offset-2 col-xs-10">
+            <button type="submit" class="btn btn-primary" ng-click="saveFactorMeasures()">Зберегти</button>
+            <button type="submit" ng-click="nextFactor()" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left"></span></button>
+            <button type="submit" ng-click="prevFactor()" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span></button>
+            
+        </div>
+    </div>
+</form>
+
+
+
+
+		</div>
+</div>
+
+<!--========================================================== -->
+
+
 
 		</div>
 
@@ -119,13 +175,16 @@
 					<td>Інтерес</td>
 					<td>Вплив</td>
 					<td>Категорія</td>
+					<td></td>
 
 				</tr>
 				<tr class="" ng-repeat="f in currentStakeHolder.factors"> 
 					<td>{{f.descr}}</td>
 					<td>{{f.interest}}</td>
-					<td>{{impact}}</td>
-					<td>{{category}}</td>				
+					<td>{{f.impact}}</td>
+					<td>{{category}}</td>
+					<td><button class="btn btn-danger" ><span class="glyphicon glyphicon-remove" ng-click="removeFactor(f.descr)" ></span></button></td>
+								
 				</tr>
 				
 			</table>
@@ -133,6 +192,22 @@
 
 
 		</div>
+
+
+
+
+		
+
+
+
+
+
+
+
+
+
+
+
 
 	</div>
 
@@ -185,48 +260,6 @@
 
 
 
-
-<div class="section2" ng-show="stage1Finished" >
-		<div class="col-md-6" >
-			<legend>Визначення вимог сторін</legend>
-
-	<form class="form-horizontal" style="width:500px">
-    
-    <div class="form-group">
-        <label for="inputPassword" class="control-label col-xs-2">Опис Вимоги</label>
-        <div class="col-xs-10">
-            <input type="text" class="form-control" id="inputPassword" placeholder="Password">
-        </div>
-    </div>
-
-
-	<div class="form-group">
-        <label for="inputPassword" class="control-label col-xs-2">Інтерес</label>
-        <div class="col-xs-10">
-            <input type="text" class="form-control" id="inputPassword" placeholder="Password">
-        </div>
-    </div>
-
-	<div class="form-group">
-        <label for="inputPassword" class="control-label col-xs-2">Рівень впливу</label>
-        <div class="col-xs-10">
-            <input type="text" class="form-control" id="inputPassword" placeholder="Password">
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        <div class="col-xs-offset-2 col-xs-10">
-            <button type="submit" class="btn btn-primary">Зберегти</button>
-        </div>
-    </div>
-</form>
-
-
-
-
-		</div>
-</div>
 
 </body>
 </html>
