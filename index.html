@@ -13,6 +13,10 @@
 <script src="app.js" ></script>
 <script src="sourses/stakeHolders.js"></script>
 <script src="sourses/factors.js"></script>
+
+<script src="svg/Snap.svg-0.4.1/dist/snap.svg.js" ></script>
+
+
 <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
 
 
@@ -20,6 +24,7 @@
 	.stakeList{
 		cursor: pointer;
 		display: block;
+		font-size: 20px;
 
 	}
 	.stakeList li {
@@ -37,6 +42,7 @@
 	.table tr{
 		background-color: rgb(78,76,76);
 		color: white;
+		font-size: 20px;
 
 	}
 	.table tr td:first-child:hover {
@@ -51,6 +57,7 @@
 
 	.factors ul {
 		padding: 0px;
+		font-size: 20px;
 	}
 
 	.factors > li{
@@ -58,6 +65,7 @@
 		margin-left: 10px;
 		margin-right: 10px;
 		padding: 0px;
+		font-size: 20px;
 	}
 
 	.factorsPanel{
@@ -67,13 +75,33 @@
 		cursor: pointer;
 		background-color: rgb(78,76,76);
 		color: white;
-
+	
 	}
 
 	.red {
 		color: red;
 	}
 
+	.compromise{
+
+	}
+	.compromise tr {
+		
+
+	}
+	.compromise tr td{
+		margin-left: 10px;
+		margin-right: 10px;
+		background-color: rgb(78,76,76);
+		color: white;
+		font-size: 20px;
+	}
+	button {
+		font-size: 20px !important;
+	}
+
+
+	
 </style>
 
 
@@ -190,15 +218,31 @@
 			</table>
 
 		<button ng-click="checkAllIsReady()" class="btn btn-primary">Побудова таблиці</button>
+		<button ng-click="drawGraph()" class="btn btn-primary">Побудова графіку</button>
+		
 		<span class="error" ng-show="somethingWrong">Не всі фактори визначені</span>
 		
 
 
 		<!--table -->
-		<table>
+		<table class="compromise">
+			<tr>
+				<td>Опис</td>
+				<td>Величини впливу</td>
+				<td>Величини інтересу</td>
+				<td>Середній вплив</td>
+				<td>Середній інтерес</td>
+				
+				
+				
+			</tr>
 			<tr ng-repeat="comp in compromiseFactors">
 				<td>{{comp.descr}}</td>
 				<td>{{comp.impacts}}</td>
+				<td>{{comp.interests}}</td>
+				<td>{{comp.avImpact}}</td>
+				<td>{{comp.avInterest}}</td>
+				
 			</tr>
 		</table>
 
@@ -211,21 +255,6 @@
 
 
 		</div>
-
-
-
-
-		
-
-
-
-
-
-
-
-
-
-
 
 
 	</div>
@@ -278,7 +307,20 @@
 
 
 
+<div class="graph" style="clear:both">
+	
+	<svg width="0" height="0">
+		<pattern id="pattern" x="0" y="0" width="10" height="10" viewBox="0 0 10 10" ></pattern>
 
+	</svg>
+
+</div>
+
+
+<script>
+
+
+</script>
 
 </body>
 </html>

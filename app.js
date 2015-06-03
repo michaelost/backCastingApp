@@ -40,7 +40,10 @@ angular.module("backCastingApp",[])
 		$scope.endStage1 = function () {
 			$scope.stage1Finished = true;
 			$scope.sortFactors();
+
 		}
+
+
 
 		$scope.addStakeHolder = function (item) {
 			if($scope.projectStakeHolders.indexOf(item) == -1) {
@@ -203,6 +206,62 @@ angular.module("backCastingApp",[])
 			console.log(compromiseFactors);
 			$scope.compromiseFactors = compromiseFactors;
 			
+		}
+
+
+		$scope.drawGraph = function () {
+
+			var s = new Snap(1000,1000);
+		s.line(0,0,1000,0).attr({
+  			stroke: "#000",
+ 			 strokeWidth: 5,
+ 			 strokeLinecap:"round"
+			})
+	    s.line(0,0,0,1000).attr({
+			 stroke: "#000",
+ 			 strokeWidth: 5,
+ 			 strokeLinecap:"round"
+			});
+	    s.line(0,1000,1000,1000).attr({
+	    	 stroke: "#000",
+ 			 strokeWidth: 5,
+ 			 strokeLinecap:"round"
+	    });
+	    s.line(1000,1000,1000,0).attr({
+	    	 stroke: "#000",
+ 			 strokeWidth: 5,
+ 			 strokeLinecap:"round"
+	    });
+	   
+	    s.text(100,400,"wqe");
+
+
+	    for (var i = 0; i < $scope.compromiseFactors.length; i++) {
+			var sum = 0, count = 0;
+			$scope.compromiseFactors[i].impacts.forEach(function (n) {
+				sum+=n; 
+				count+=1;
+			});
+			$scope.compromiseFactors[i].avImpact = Math.floor(sum / count);
+			sum = 0; count = 0;
+
+			$scope.compromiseFactors[i].interests.forEach(function (n) {
+				sum +=n;
+				count+=1;
+			});
+			$scope.compromiseFactors[i].avInterest = Math.floor(sum / count);
+			sum = 0; count = 0;
+
+		}
+
+		console.log("========compromiseFactors====");
+		for(var i = 0; i < $scope.compromiseFactors.length; i++) {
+			console.log($scope.compromiseFactors[i]);
+		}
+
+		/*draw circles*/
+
+
 		}
 
 
