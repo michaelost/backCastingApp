@@ -103,7 +103,7 @@
 					<td ng-click="setCurrentStakeHolder(stake)">{{stake.name}}</td>
 					<td ng-class="{'red' : stake.factors.length == 0}">факторів: {{stake.factors.length}}</td>
 					<td><button class="btn btn-success" >Заповнити</button></td>
-					<td><button class="btn btn-primary" >Автоматично заповнити</button></td>
+					<td><button class="btn btn-primary" ng-click="autoFill(stake)" >Автоматично заповнити</button></td>
 					<td><button class="btn btn-danger op" ng-click="deleteStakeHolder(stake)" >
 						<span class="glyphicon glyphicon-remove" ></span>
 					</button></td>				
@@ -189,8 +189,8 @@
 				
 			</table>
 
-
-
+		<button ng-click="checkAllIsReady()" class="btn btn-primary">Побудова таблиці</button>
+		<span class="error" ng-show="somethingWrong">Не всі фактори визначені</span>
 		</div>
 
 

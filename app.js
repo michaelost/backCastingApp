@@ -110,7 +110,90 @@ angular.module("backCastingApp",[])
 
 		}
 
+		$scope.autoFill = function (stake) {
+			stake.factors = [];
+			var min = 3, max = 9,
+			factorsCount = Math.floor(Math.random() * (max - min)) + min, 
+			prevRand = [],
+			curr
+			while(factorsCount) {
+				while(prevRand.indexOf(curr) != -1) {
+					curr = Math.floor(Math.random() * ($scope.factors.length-1 - 1)) + 1;	
+				}
+				stake.factors.push($scope.factors[curr]);
+				if (stake.factors.length > 1){
+				stake.factors[stake.factors.length-1].impact = Math.floor(Math.random() * (5 - 1)) + 1;
+				stake.factors[stake.factors.length-1].interest = Math.floor(Math.random() * (5 - 1)) + 1;
+				}
+				prevRand.push(curr);
+				factorsCount--;
+				
+			}
+			console.log(stake.factors);
+			stake.factors.shift();
+
+		}
+
 		$scope.currentStakeHolder = {};
+
+		$scope.somethingWrong = false;
+
+		$scope.checkAllIsReady = function () {
+			var compromiseFactors = [],
+				metrica;
+		
+		function search(descr) {
+				var index = -1;
+			
+				for(var i = 0; i < compromiseFactors.length; i++) {
+					if (compromiseFactors[i].descr == descr ) {
+						index = i;
+						return i;
+					}
+				}
+				
+
+			
+		return index;
+		}
+
+
+			for(var i = 0; i < $scope.projectStakeHolders.length; i++) {
+				console.log($scope.projectStakeHolders.length);
+				for(var j = 0; j < $scope.projectStakeHolders[i].factors.length; j++) {
+				  metrica = search($scope.projectStakeHolders[i].factors[j].descr); 
+					if (metrica == -1 ) {
+					 var temp = {
+							descr : "",
+							impacts : [],
+							interests : [],
+							owners : [],
+							category: "",
+						};
+						temp.descr = $scope.projectStakeHolders[i].factors[j].descr; 
+						temp.impacts.push($scope.projectStakeHolders[i].factors[j].impact);
+						temp.interests.push($scope.projectStakeHolders[i].factors[j].interest);
+						temp.owners.push($scope.projectStakeHolders[i].name);
+						temp.category = $scope.projectStakeHolders[i].factors[j].category;
+					
+						compromiseFactors.push(temp);
+					}
+					else {
+						compromiseFactors[metrica].impacts.push($scope.projectStakeHolders[i].factors[j].impact);
+						compromiseFactors[metrica].interests.push($scope.projectStakeHolders[i].factors[j].interest);
+						compromiseFactors[metrica].owners.push($scope.projectStakeHolders[i].name);
+						
+					}
+
+				}
+			}
+			console.log("================");
+			for(var i = 0; i < compromiseFactors.length; i++) {
+				console.log(compromiseFactors[i]);	
+			}
+			
+		}
+
 
 
 	}]);
