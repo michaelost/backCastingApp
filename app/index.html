@@ -5,9 +5,9 @@
 	<title>
 
 	</title>
-
-<script src="bower_components/angular/angular.js" ></script>
 <script src="bower_components/jquery/dist/jquery.min.js" ></script>
+<script src="bower_components/angular/angular.js" ></script>
+
 <script src="bower_components/bootstrap/dist/js/bootstrap.js" ></script>
 
 <script src="app.js" ></script>
@@ -140,6 +140,16 @@
 		<div  ng-include src="'partials/factorsList.html'"></div>
 	</div>
 
+	<div class="row">
+		<div class="col-md-6"  ng-include src="'partials/graph.html'" ></div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6 graphic">
+				
+		</div>
+	</div>
+
 
 
 </div>
@@ -197,45 +207,6 @@
 -->
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="graph" style="clear:both" ng-show="stage1Finished" >
-	
-	<svg width="0" height="0">
-		<pattern id="pattern" x="0" y="0" width="10" height="10" viewBox="0 0 10 10" ></pattern>
-
-	</svg>
-	<table class="table compromiseTable"  >
-		<tr>
-			<td>Фактор</td>
-			<td>Номер</td>
-		</tr>
-		<tr ng-repeat="comp in compromiseFactors" >
-			<td>{{comp.descr}}</td>
-			<td>{{comp.number}}</td>
-			
-		</tr>
-	</table>
-
-</div>
 
 
 <script>

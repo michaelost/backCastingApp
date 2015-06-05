@@ -212,6 +212,12 @@ angular.module("backCastingApp",[])
 		$scope.drawGraph = function () {
 
 			var s = new Snap(1000,1000);
+
+			svgTag = $('svg');
+			console.log(svgTag);
+			svgTag.appendTo($('.graphic'));
+
+
 		s.line(0,0,1000,0).attr({
   			stroke: "#000",
  			 strokeWidth: 5,
