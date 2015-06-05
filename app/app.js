@@ -13,6 +13,9 @@ angular.module("backCastingApp",[])
 			technological: []
 		}
 
+
+		$scope.graphs = [];
+
 		$scope.sortFactors = function () {
 			$scope.factors.forEach(function (n) {
 				switch(n.category) {
@@ -209,14 +212,31 @@ angular.module("backCastingApp",[])
 		}
 
 
+		$scope.nextGraph = function () {
+
+		}
+		$scope.prevGraph = function () {
+
+		}
+
+
+
 		$scope.drawGraph = function () {
+
 
 			var s = new Snap(1000,1000);
 
-			svgTag = $('svg');
-			console.log(svgTag);
+			svgTag = $('svg').last();
+			console.log("leaaaaa");
+			console.log($scope.graphs.length);
+			console.log($scope.graphs);
+			$('.graphic').empty();
+			$('.graphic').html('');
+
+
 			svgTag.appendTo($('.graphic'));
 
+			
 
 		s.line(0,0,1000,0).attr({
   			stroke: "#000",
@@ -283,7 +303,13 @@ angular.module("backCastingApp",[])
 				fontSize: "40px" 
 			});
 
+	   $scope.graphs.unshift({
+				graph : s,
+				info : [].concat($scope.compromiseFactors)
+			
+			});
 
+	   
 	   
 
 	   

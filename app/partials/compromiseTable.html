@@ -2,10 +2,14 @@
 		<tr>
 			<td>Фактор</td>
 			<td>Номер</td>
+			<td>Середній вплив</td>
+			<th>Середній інтерес</th>
 		</tr>
 		<tr ng-repeat="comp in compromiseFactors" >
 			<td>{{comp.descr}}</td>
 			<td>{{comp.number}}</td>
+			<td>{{comp.avImpact}}</td>
+			<td>{{comp.avInterest}}</td>
 			
 		</tr>
 	</table>
