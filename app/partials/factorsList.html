@@ -1,0 +1,39 @@
+
+
+<div class="factorsPanel" ng-show="stage1Finished" >
+			<legend>Оберіть фактори для обраної сторони </legend>
+		<div >
+			<ul class="factors list-group" >
+				<li>
+					<h3>eкoномічні</h3>
+					<ul>	
+						<li class="list-group-item" ng-repeat="ec in sortedFactors.economic" ng-click="addFactorToStakeHolder(ec)">{{ec.descr}}</li>
+					</ul>
+				</li>
+			
+				<li>
+					<h3>coціальні</h3>
+					<ul>
+						<li class="list-group-item" ng-repeat="soc in sortedFactors.social" ng-click="addFactorToStakeHolder(soc)">{{soc.descr}}</li>
+					</ul>
+				</li>
+
+				<li>
+					<h3>організаційні</h3>
+					<ul>
+						<li class="list-group-item" ng-repeat="org in sortedFactors.organizational" ng-click="addFactorToStakeHolder(org)">{{org.descr}}</li>
+					</ul>
+				</li>
+
+				<li>
+					<h3>організаційні</h3>
+					<ul>
+						<li class="list-group-item" ng-repeat="tech in sortedFactors.technological" ng-click="addFactorToStakeHolder(tech)">{{tech.descr}}</li>
+					</ul>
+				</li>
+
+				</ul>
+
+		</div>
+
+</div>

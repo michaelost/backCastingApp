@@ -1,0 +1,56 @@
+<div  ng-show="stage1Finished">
+			
+	<!--
+			<legend>Фактори зацікавленої сторони <b>{{currentStakeHolder.name}}<b></legend>
+		
+			<table class="table">
+				<tr>
+					<td>Опис</td>
+					<td>Інтерес</td>
+					<td>Вплив</td>
+					<td>Категорія</td>
+					<td></td>
+
+				</tr>
+				<tr class="" ng-repeat="f in currentStakeHolder.factors"> 
+					<td>{{f.descr}}</td>
+					<td>{{f.interest}}</td>
+					<td>{{f.impact}}</td>
+					<td>{{category}}</td>
+					<td><button class="btn btn-danger" ><span class="glyphicon glyphicon-remove" ng-click="removeFactor(f.descr)" ></span></button></td>
+								
+				</tr>
+				
+			</table>
+
+		-->			<button ng-click="checkAllIsReady()" class="btn btn-primary">Побудова таблиці</button>
+					<button ng-click="drawGraph()" class="btn btn-primary">Побудова графіку</button>
+					<span class="error" ng-show="somethingWrong">Не всі фактори визначені</span>
+		
+
+
+			<!--table -->
+			<table class="compromise resultTable">
+				<tr>
+					<td>Опис</td>
+					<td>Величини впливу</td>
+					<td>Величини інтересу</td>
+					<td>Середній вплив</td>
+					<td>Середній інтерес</td>
+				</tr>
+				<tr ng-repeat="comp in compromiseFactors">
+					<td>{{comp.descr}}</td>
+					<td>{{comp.impacts}}</td>
+					<td>{{comp.interests}}</td>
+					<td>{{comp.avImpact}}</td>
+					<td>{{comp.avInterest}}</td>
+				</tr>
+			</table>
+
+
+
+
+		  </div>
+			<!--  factors block ending -->
+
+</div>

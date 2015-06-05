@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="backCastingApp" >
+<head>
+	<meta charset="UTF-8">
+	<title>
+
+	</title>
+
+<script src="bower_components/angular/angular.js" ></script>
+<script src="bower_components/jquery/dist/jquery.min.js" ></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js" ></script>
+
+<script src="app.js" ></script>
+<script src="sourses/stakeHolders.js"></script>
+<script src="sourses/factors.js"></script>
+
+<script src="svg/Snap.svg-0.4.1/dist/snap.svg.js" ></script>
+
+
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+
+
+<style>
+	.stakeList{
+		cursor: pointer;
+		display: block;
+		font-size: 20px;
+
+	}
+	.stakeList li {
+		display: block;
+		
+		
+	}
+
+	.stakeList li:hover{
+		background-color: #4E4C4C;
+		color:white;
+		transition: 0.4s;
+	}
+
+	.table tr{
+		background-color: rgb(78,76,76);
+		color: white;
+		font-size: 20px;
+
+	}
+	.table tr td:first-child:hover {
+		cursor: pointer;
+	}
+	.section2{
+		clear: both;
+	}
+	.op{
+		border-radius: 10px;
+	}
+
+	.factors ul {
+		padding: 0px;
+		font-size: 20px;
+	}
+
+	.factors > li{
+		float: left;
+		margin-left: 10px;
+		margin-right: 10px;
+		padding: 0px;
+		font-size: 20px;
+	}
+
+	.factorsPanel{
+		clear:both;
+	}
+	.factorsPanel ul > li > ul li:hover {
+		cursor: pointer;
+		background-color: rgb(78,76,76);
+		color: white;
+	
+	}
+
+	.red {
+		color: red;
+	}
+
+	.compromise{
+
+	}
+	.compromise tr {
+		
+
+	}
+	.compromise tr td{
+		margin-left: 10px;
+		margin-right: 10px;
+		background-color: rgb(78,76,76);
+		color: white;
+		font-size: 20px;
+	}
+	button {
+		font-size: 20px !important;
+	}
+
+	.compromiseTable {
+		width: 400px !important;
+	}
+	
+</style>
+
+
+
+</head>
+<body ng-controller="backController" >
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+			<div ng-include src="'partials/selectStakeHolders.html'" ></div>
+			<div ng-include src="'partials/selectedStakeHoldersFactors.html'" ng-show="stage1Finished"></div>
+        </div>
+
+      <div class="col-md-6">
+      		<div ng-include src="'partials/selectedStakeHolders.html'" ></div>
+      </div>
+       
+    </div>
+
+	<div class="row">
+
+		<div class="col-md-6">
+			<div  ng-include src="'partials/changeCurrentMeasure.html'"></div>
+		</div>
+        <div class="col-md-6">
+        	<div  ng-include src="'partials/currentStakeHolderFactors.html'"></div>
+        </div>
+	</div>
+
+	<div class="row">
+		<div  ng-include src="'partials/factorsList.html'"></div>
+	</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+	
+<div class="section1">
+		
+		
+		<div class="col-md-4" ng-hide="stage1Finished"  >
+			<legend> Оберіть зацікавлені сторони для участі у проекті </legend>	
+			<ul class="list-group stakeList ">
+			<li class="list-group-item " ng-repeat="stake in stakeHolders" ng-click="addStakeHolder(stake)" >{{stake.name}}</li>
+			</ul>
+
+		<button ng-click="endStage1()" class="btn btn-primary" >Далі</button>
+		</div>
+		
+		
+
+		<div class="col-md-4" >
+			<legend> Зацікавлені сторони проекту: </legend>
+			<table class="table">
+				<tr class="" ng-repeat="stake in projectStakeHolders"> 
+					<td ng-click="setCurrentStakeHolder(stake)">{{stake.name}}</td>
+					<td ng-class="{'red' : stake.factors.length == 0}">факторів: {{stake.factors.length}}</td>
+					<td><button class="btn btn-success" >Заповнити</button></td>
+					<td><button class="btn btn-primary" ng-click="autoFill(stake)" >Автоматично заповнити</button></td>
+					<td><button class="btn btn-danger op" ng-click="deleteStakeHolder(stake)" >
+						<span class="glyphicon glyphicon-remove" ></span>
+					</button></td>				
+				</tr>
+				
+			</table>
+
+		</div>
+
+</div>
+
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="graph" style="clear:both" ng-show="stage1Finished" >
+	
+	<svg width="0" height="0">
+		<pattern id="pattern" x="0" y="0" width="10" height="10" viewBox="0 0 10 10" ></pattern>
+
+	</svg>
+	<table class="table compromiseTable"  >
+		<tr>
+			<td>Фактор</td>
+			<td>Номер</td>
+		</tr>
+		<tr ng-repeat="comp in compromiseFactors" >
+			<td>{{comp.descr}}</td>
+			<td>{{comp.number}}</td>
+			
+		</tr>
+	</table>
+
+</div>
+
+
+<script>
+
+
+</script>
+
+
+
+
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
