@@ -272,7 +272,7 @@ angular.module("backCastingApp",[])
  			strokeLinecap:"round"
 	   });
 
-	   s.text(50,900,"interes").attr({
+	   s.text(50,900,"impact").attr({
 				fill: "#200000",
 				fontSize: "40px" 
 			});

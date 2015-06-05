@@ -1,0 +1,22 @@
+
+			<legend>Фактори зацікавленої сторони <b>{{currentStakeHolder.name}}<b></legend>
+		
+			<table class="table">
+				<tr>
+					<td>Опис</td>
+					<td>Інтерес</td>
+					<td>Вплив</td>
+					<td>Категорія</td>
+					<td></td>
+
+				</tr>
+				<tr class="" ng-repeat="f in currentStakeHolder.factors"> 
+					<td>{{f.descr}}</td>
+					<td>{{f.interest}}</td>
+					<td>{{f.impact}}</td>
+					<td>{{category}}</td>
+					<td><button class="btn btn-danger" ><span class="glyphicon glyphicon-remove" ng-click="removeFactor(f.descr)" ></span></button></td>
+								
+				</tr>
+				
+			</table>

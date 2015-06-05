@@ -110,12 +110,56 @@
 
 </head>
 <body ng-controller="backController" >
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+			<div ng-include src="'partials/selectStakeHolders.html'" ></div>
+			<div ng-include src="'partials/selectedStakeHoldersFactors.html'" ng-show="stage1Finished"></div>
+        </div>
+
+      <div class="col-md-6">
+      		<div ng-include src="'partials/selectedStakeHolders.html'" ></div>
+      </div>
+       
+    </div>
+
+	<div class="row">
+
+		<div class="col-md-6"><p>Box 3</p></div>
+        <div class="col-md-6">
+        	<div  ng-include src="'partials/currentStakeHolderFactors.html'"></div>
+        </div>
+       
+
+	</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
 	
-	<div class="section1">
+<div class="section1">
 		
-		<!--potential stakeholders
-		-->
-		<div class="col-md-2" ng-hide="stage1Finished"  >
+		
+		<div class="col-md-4" ng-hide="stage1Finished"  >
 			<legend> Оберіть зацікавлені сторони для участі у проекті </legend>	
 			<ul class="list-group stakeList ">
 			<li class="list-group-item " ng-repeat="stake in stakeHolders" ng-click="addStakeHolder(stake)" >{{stake.name}}</li>
@@ -141,11 +185,105 @@
 				
 			</table>
 
+		</div>
+
+</div>
 
 
-<!--========================================================== -->
+-->
+
+
+
+
+<div class="factorsPanel" ng-show="stage1Finished" >
+			<legend>Оберіть фактори для обраної сторони </legend>
+		<div >
+			<ul class="factors list-group" >
+				<li>
+					<h3>eкoномічні</h3>
+					<ul>	
+						<li class="list-group-item" ng-repeat="ec in sortedFactors.economic" ng-click="addFactorToStakeHolder(ec)">{{ec.descr}}</li>
+					</ul>
+				</li>
+			
+				<li>
+					<h3>coціальні</h3>
+					<ul>
+						<li class="list-group-item" ng-repeat="soc in sortedFactors.social" ng-click="addFactorToStakeHolder(soc)">{{soc.descr}}</li>
+					</ul>
+				</li>
+
+				<li>
+					<h3>організаційні</h3>
+					<ul>
+						<li class="list-group-item" ng-repeat="org in sortedFactors.organizational" ng-click="addFactorToStakeHolder(org)">{{org.descr}}</li>
+					</ul>
+				</li>
+
+				<li>
+					<h3>організаційні</h3>
+					<ul>
+						<li class="list-group-item" ng-repeat="tech in sortedFactors.technological" ng-click="addFactorToStakeHolder(tech)">{{tech.descr}}</li>
+					</ul>
+				</li>
+
+				</ul>
+
+		</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="graph" style="clear:both" ng-show="stage1Finished" >
+	
+	<svg width="0" height="0">
+		<pattern id="pattern" x="0" y="0" width="10" height="10" viewBox="0 0 10 10" ></pattern>
+
+	</svg>
+	<table class="table compromiseTable"  >
+		<tr>
+			<td>Фактор</td>
+			<td>Номер</td>
+		</tr>
+		<tr ng-repeat="comp in compromiseFactors" >
+			<td>{{comp.descr}}</td>
+			<td>{{comp.number}}</td>
+			
+		</tr>
+	</table>
+
+</div>
+
+
+<script>
+
+
+</script>
+
+
+
+
+
 		
-<div class="section2" ng-show="stage1Finished" >
+<div class="section2 factorsChanging" ng-show="stage1Finished" >
 		<div class="col-md-6" >
 			<legend>Визначення вимог сторін</legend>
 
@@ -190,63 +328,6 @@
 		</div>
 </div>
 
-<!--========================================================== -->
-
-
-
-		</div>
-
-		<div class="col-md-4">
-			<legend>Фактори зацікавленої сторони <b>{{currentStakeHolder.name}}<b></legend>
-		
-			<table class="table">
-				<tr>
-					<td>Опис</td>
-					<td>Інтерес</td>
-					<td>Вплив</td>
-					<td>Категорія</td>
-					<td></td>
-
-				</tr>
-				<tr class="" ng-repeat="f in currentStakeHolder.factors"> 
-					<td>{{f.descr}}</td>
-					<td>{{f.interest}}</td>
-					<td>{{f.impact}}</td>
-					<td>{{category}}</td>
-					<td><button class="btn btn-danger" ><span class="glyphicon glyphicon-remove" ng-click="removeFactor(f.descr)" ></span></button></td>
-								
-				</tr>
-				
-			</table>
-
-		<button ng-click="checkAllIsReady()" class="btn btn-primary">Побудова таблиці</button>
-		<button ng-click="drawGraph()" class="btn btn-primary">Побудова графіку</button>
-		
-		<span class="error" ng-show="somethingWrong">Не всі фактори визначені</span>
-		
-
-
-		<!--table -->
-		<table class="compromise">
-			<tr>
-				<td>Опис</td>
-				<td>Величини впливу</td>
-				<td>Величини інтересу</td>
-				<td>Середній вплив</td>
-				<td>Середній інтерес</td>
-				
-				
-				
-			</tr>
-			<tr ng-repeat="comp in compromiseFactors">
-				<td>{{comp.descr}}</td>
-				<td>{{comp.impacts}}</td>
-				<td>{{comp.interests}}</td>
-				<td>{{comp.avImpact}}</td>
-				<td>{{comp.avInterest}}</td>
-				
-			</tr>
-		</table>
 
 
 
@@ -256,84 +337,10 @@
 
 
 
-		</div>
-
-
-	</div>
-
-
-
-<div class="factorsPanel">
-<legend>Оберіть фактори для обраної сторони </legend>
-<div >
-		<ul class="factors list-group" >
-			<li>
-				<h3>eкoномічні</h3>
-				<ul>
-					<li class="list-group-item" ng-repeat="ec in sortedFactors.economic" ng-click="addFactorToStakeHolder(ec)">{{ec.descr}}</li>
-				</ul>
-			</li>
-			
-			<li>
-				<h3>coціальні</h3>
-				<ul>
-					<li class="list-group-item" ng-repeat="soc in sortedFactors.social" ng-click="addFactorToStakeHolder(soc)">{{soc.descr}}</li>
-				</ul>
-			</li>
-
-			<li>
-				<h3>організаційні</h3>
-				<ul>
-					<li class="list-group-item" ng-repeat="org in sortedFactors.organizational" ng-click="addFactorToStakeHolder(org)">{{org.descr}}</li>
-				</ul>
-			</li>
-
-			<li>
-				<h3>організаційні</h3>
-				<ul>
-					<li class="list-group-item" ng-repeat="tech in sortedFactors.technological" ng-click="addFactorToStakeHolder(tech)">{{tech.descr}}</li>
-				</ul>
-			</li>
-			
-
-
-		</ul>
-
-	</div>
-
-</div>
 
 
 
 
-
-
-
-<div class="graph" style="clear:both">
-	
-	<svg width="0" height="0">
-		<pattern id="pattern" x="0" y="0" width="10" height="10" viewBox="0 0 10 10" ></pattern>
-
-	</svg>
-	<table class="table compromiseTable"  >
-		<tr>
-			<td>Фактор</td>
-			<td>Номер</td>
-		</tr>
-		<tr ng-repeat="comp in compromiseFactors" >
-			<td>{{comp.descr}}</td>
-			<td>{{comp.number}}</td>
-			
-		</tr>
-	</table>
-
-</div>
-
-
-<script>
-
-
-</script>
 
 </body>
 </html>

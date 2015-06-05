@@ -1,0 +1,15 @@
+<div class="section1">
+		
+		<!--potential stakeholders
+		-->
+		<div ng-hide="stage1Finished"  >
+			<legend> Оберіть зацікавлені сторони для участі у проекті </legend>	
+			<ul class="list-group stakeList ">
+			<li class="list-group-item " ng-repeat="stake in stakeHolders" ng-click="addStakeHolder(stake)" >{{stake.name}}</li>
+			</ul>
+
+		<button ng-click="endStage1()" class="btn btn-primary" >Далі</button>
+		</div>
+		
+		
+</div>
