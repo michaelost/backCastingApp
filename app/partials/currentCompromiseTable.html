@@ -1,0 +1,15 @@
+<table class="table compromiseTable"  >
+		<tr>
+			<td>Фактор</td>
+			<td>Номер</td>
+			<td>Середній вплив</td>
+			<th>Середній інтерес</th>
+		</tr>
+		<tr ng-repeat="comp in gr[grIndex].info" >
+			<td>{{comp.descr}}</td>
+			<td>{{comp.number}}</td>
+			<td>{{comp.avImpact}}</td>
+			<td>{{comp.avInterest}}</td>
+			
+		</tr>
+	</table>

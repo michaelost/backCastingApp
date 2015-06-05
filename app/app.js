@@ -211,31 +211,48 @@ angular.module("backCastingApp",[])
 			
 		}
 
+		
+
 
 		$scope.nextGraph = function () {
-
+			$('.graphic').empty();
+			$('.graphic').html('');
+			if( $scope.grIndex == $scope.gr.length-1) $scope.grIndex = 0;
+				else $scope.grIndex++;
+			($scope.gr[$scope.grIndex].graphic).appendTo('.graphic');
 		}
 		$scope.prevGraph = function () {
+			$('.graphic').empty();
+			$('.graphic').html('');
+			if ($scope.grIndex == 0) $scope.grIndex = $scope.gr.length-1;
+			else $scope.grIndex--;
+			($scope.gr[$scope.grIndex].graphic).appendTo('.graphic');
 
 		}
 
 
-
+		$scope.gr = [];
+		$scope.grIndex;
+		$scope.counter = 0;
 		$scope.drawGraph = function () {
-
 
 			var s = new Snap(1000,1000);
 
 			svgTag = $('svg').last();
-			console.log("leaaaaa");
-			console.log($scope.graphs.length);
-			console.log($scope.graphs);
+			$scope.gr.push({
+				graphic: svgTag,
+				info: [].concat($scope.compromiseFactors)
+			});
+			$scope.grIndex = $scope.gr.length-1;
+			console.log("svhTag");
+			
+		
+			
 			$('.graphic').empty();
 			$('.graphic').html('');
-
-
 			svgTag.appendTo($('.graphic'));
-
+			
+			
 			
 
 		s.line(0,0,1000,0).attr({
@@ -303,12 +320,7 @@ angular.module("backCastingApp",[])
 				fontSize: "40px" 
 			});
 
-	   $scope.graphs.unshift({
-				graph : s,
-				info : [].concat($scope.compromiseFactors)
-			
-			});
-
+	   
 	   
 	   
 

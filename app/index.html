@@ -145,9 +145,11 @@
 	</div>
 
 	<div class="row">
+	<!--
 		<div class="col-md-6 compTable">
 			<div ng-include src="'partials/compromiseTable.html'"></div>
 		</div>
+	-->
 	</div>
 	
 	<div class="row">
@@ -155,13 +157,23 @@
 				
 		</div>
 		
-		<div class="col-md-4 currentTable" >
-			
-		</div>
-	
-
+		
 	</div>
 
+	<div class="row" >
+		<div class="col-md-6 paginate" >
+			
+			<button class="btn btn-primary" ng-click="nextGraph()">>></button>
+			<button class="btn btn-primary" ng-click="prevGraph()"><<</button>
+			
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-4 currentTable" >
+		 	<div ng-include src="'partials/currentCompromiseTable.html'"></div>
+		</div>
+	</div>
 
 
 </div>
