@@ -1,4 +1,5 @@
 describe("check backCasgint", function () {
+	
 	it("checking stakeHolders pannel", function () {
 		browser.get('http://localhost:3000/');	
 		expect($('div.section1 legend').getText()).toEqual('Оберіть зацікавлені сторони для участі у проекті');
@@ -81,6 +82,77 @@ describe("check backCasgint", function () {
 				});
 			});	
 		});
+	});
+
+
+	it("checking graph", function () {
+		expect($('div.graphic svg').isDisplayed()).toBeTruthy();
+		expect($('.compromiseTable').isDisplayed()).toBeTruthy();
+
+
+		expect(element.all(by.css('.compromiseTable tr')).count()).not.toEqual(1);
+				element.all(by.css('.compromiseTable tr')).each(function (n) {
+					expect(n.element(by.css('td:nth-of-type(1)')).getText()).not.toEqual("");
+					expect(n.element(by.css('td:nth-of-type(2)')).getText()).not.toEqual("");
+					expect(n.element(by.css('td:nth-of-type(3)')).getText()).not.toEqual("");
+								
+				});
+	});
+
+	
+
+	it("checking manual filling", function () {
+		browser.get('http://localhost:3000/');
+		var items =  element.all(by.css('ul.stakeList li'));
+	 		items.each(function (n) {
+	 			n.click();
+	 		});
+
+	 	$('div.section1 button').click().then(function () {
+			expect($('.compromise').isDisplayed()).toBeTruthy();
+			expect(element.all(by.css('div.selectedStakeHolders tr td:nth-child(1)')).get(0).getText()).toEqual("замовники");
+			element.all(by.css('div.selectedStakeHolders tr td:nth-child(1)')).get(0).click().then(function () {
+			
+				var items = element.all(by.css('.factorsPanel ul li.list-group-item'));
+				items.get(0).click();	  	
+				$(".factorsChanging .int").sendKeys(5);
+				$(".factorsChanging .imp").sendKeys(5);
+				items.get(1).click();
+				$('.glyphicon-chevron-right').click();
+				$(".factorsChanging .int").sendKeys(6);
+				$(".factorsChanging .imp").sendKeys(6);
+				items.get(2).click();
+				$('.glyphicon-chevron-right').click();
+				$('.glyphicon-chevron-right').click();
+				
+				$(".factorsChanging .int").sendKeys(7);
+				$(".factorsChanging .imp").sendKeys(7);
+				
+				expect(element(by.css('.currentStakeHolderFactors tr:nth-of-type(2) td:nth-of-type(1)')).getText()).toEqual('вартість');
+				expect(element(by.css('.currentStakeHolderFactors tr:nth-of-type(2) td:nth-of-type(2)')).getText()).toEqual('5');
+				expect(element(by.css('.currentStakeHolderFactors tr:nth-of-type(2) td:nth-of-type(3)')).getText()).toEqual('5');
+				
+				expect(element(by.css('.currentStakeHolderFactors tr:nth-of-type(3) td:nth-of-type(1)')).getText()).toEqual('ресурсоємність');
+				expect(element(by.css('.currentStakeHolderFactors tr:nth-of-type(3) td:nth-of-type(2)')).getText()).toEqual('6');
+				expect(element(by.css('.currentStakeHolderFactors tr:nth-of-type(3) td:nth-of-type(3)')).getText()).toEqual('6');
+				
+				expect(element(by.css('.currentStakeHolderFactors tr:nth-of-type(4) td:nth-of-type(1)')).getText()).toEqual('зарплатня');
+				expect(element(by.css('.currentStakeHolderFactors tr:nth-of-type(4) td:nth-of-type(2)')).getText()).toEqual('7');
+				expect(element(by.css('.currentStakeHolderFactors tr:nth-of-type(4) td:nth-of-type(3)')).getText()).toEqual('7');
+				
+				
+				
+					
+
+				browser.sleep(5000);
+									
+			
+
+			});
+
+
+		});
+
 	});
 
 
